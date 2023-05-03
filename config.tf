@@ -1,13 +1,6 @@
 terraform {
   
-  cloud {
-    organization = "sculptsoft"
-
-    workspaces {
-      name = "SC-TF-CircleCI-API-Driven"
-    }
-  }
-
+  cloud {}
     required_version = ">= 0.12"
     # backend "s3" {
     #  bucket = "mohit-dev-terraform-storage"
