@@ -1,36 +1,24 @@
-version: 2.1
-
+version: 2.1  
 jobs:
-  terraform:
+  plan-apply:
+
     docker:
-      - image: circleci/python:3.7
-            
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+
     environment:
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
       AWS_SESSION_TOKEN: $AWS_SESSION_TOKEN
 
-      
     steps:
       - checkout
-
-      - run: echo $AWS_ACCESS_KEY_ID
-      - run: echo $AWS_SECRET_ACCESS_KEY
-      - run: echo $AWS_SESSION_TOKEN
-
-
-      - run: |
-          sudo apt-get update && sudo apt-get install unzip -y
-          curl -sSL https://releases.hashicorp.com/terraform/1.1.4/terraform_1.1.4_linux_amd64.zip -o terraform.zip
-          unzip terraform.zip
-          sudo mv terraform /usr/local/bin/
-          rm terraform.zip
-      
       - run: terraform init
       - run: terraform validate -no-color
       - run: terraform plan -no-color -input=false
       - run: terraform apply -auto-approve -input=false
+
 workflows:
-  terraform-workflow:
+  version: 2
+  plan_approve_apply:
     jobs:
-      - terraform
+      - plan-apply
