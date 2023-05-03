@@ -1,6 +1,6 @@
 version: 2.1  
 jobs:
-  plan-apply:
+  createS3:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
 
@@ -20,4 +20,4 @@ workflows:
   version: 2
   plan_approve_apply:
     jobs:
-      - plan-apply
+      - createS3
