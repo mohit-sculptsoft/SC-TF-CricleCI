@@ -18,6 +18,6 @@ jobs:
 
 workflows:
   version: 2
-  plan_approve_apply:
+  Create_AWS_resource:
     jobs:
       - createS3
