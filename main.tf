@@ -7,5 +7,5 @@ provider "aws" {
 module "s3" {
     source = "./s3"
     #bucket name should be unique
-    bucket_name = "mohit-test-3"       
+    bucket_name = "mohit-test-4"       
 }
