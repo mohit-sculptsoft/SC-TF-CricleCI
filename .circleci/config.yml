@@ -16,8 +16,19 @@ jobs:
       - run: terraform plan -no-color -input=false
       - run: terraform apply -auto-approve -input=false
 
+  testing:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+
+    steps:
+      - checkout
+      - run: terraform init
+      - run: terraform destroy
+
+
 workflows:
   version: 2
   Create_AWS_resource:
     jobs:
       - createS3
+      - testing
