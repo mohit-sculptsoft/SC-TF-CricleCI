@@ -31,4 +31,11 @@ workflows:
   Create_AWS_resource:
     jobs:
       - createS3
-      - testing
+      - testing:
+          always_run: true
+          requires:
+            - createS3
+          steps:
+            - run:
+                name: Finalize job
+                command: echo "Finalize job is running"
